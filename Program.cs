@@ -26,9 +26,9 @@ namespace LabFootball
             public static void AddTeams()
             {
                 validator = new InputValidator();
-                validator.Add(new InputValidator.IntNumber("Total teams", "How many teams you want ?", 1, 100));
-                validator.Add(new InputValidator.IntNumber("Permanent players", "How many Permanent players per Team ?", 1, 100));
-                validator.Add(new InputValidator.IntNumber("Transfer players", "How many Transfer players per Team ?", 1, 100));
+                validator.Add(new InputValidator.IntNumber("Total teams", "How many teams you want ?", 1, 1000));
+                validator.Add(new InputValidator.IntNumber("Permanent players", "How many Permanent players per Team ?", 1, 1000));
+                validator.Add(new InputValidator.IntNumber("Transfer players", "How many Transfer players per Team ?", 1, 1000));
 
                 for(int i = 0; i < validator.Items.Count; i++)
                 {
@@ -55,14 +55,14 @@ namespace LabFootball
                 switch (userInput)
                 {
                     case "/?":
-                        Console.WriteLine(" a)\tAdd :\n\t\t- Teams, type '1'");
-                        Console.WriteLine(" b)\tPrint :\n\t\t- All Teams with players : type '2'\n\t\t- Younger Player of each Team : type '3'\n\t\t- 1st Scorer of each Team : type '4'\n\t\t- Team with best Attack : type '5'");
-                        Console.WriteLine(" c.\tInfo :\n\t\t- Exit App, type 'exit'\n\t\t- Clear screen, type '0'\n\t\t- View Help, type '/?'");
+                        Console.WriteLine(" a)\tAdd\t:\n\t\t- Teams, type '1'");
+                        Console.WriteLine(" b)\tPrint\t:\n\t\t- All Teams with players : type '2'\n\t\t- Younger Player of each Team : type '3'\n\t\t- 1st Scorer of each Team : type '4'\n\t\t- Team with best Attack : type '5'");
+                        Console.WriteLine(" c.\tInfo\t:\n\t\t- Exit App, type 'exit'\n\t\t- Clear screen, type '0'\n\t\t- View Help, type '/?'");
                         ManageUserInput(Console.ReadLine());
                         break;
 
                     case "1":
-                        Console.WriteLine("Adding Teams -->");
+                        Console.WriteLine("Adding Teams --> (Tip: To cancel action type 'cancel')");
                         AddTeams();
                         Console.WriteLine($"\nTotal teams added: {teams.Count}\n");
                         ManageUserInput(Console.ReadLine());
@@ -70,10 +70,11 @@ namespace LabFootball
 
                     case "2":
                         Console.WriteLine("\nPrinting Teams with Players -->");
-                        foreach(Team team in teams)
-                        {
-                            Console.WriteLine(team.PrintTeamWithPlayers());
-                        }
+                        Console.WriteLine(Team.PrintAllTeamsWithPlayers(teams));
+                        //foreach(Team team in teams)
+                        //{
+                        //    Console.WriteLine(team.PrintTeamWithPlayers());
+                        //}
                         Console.WriteLine($"\nEnd of printing {teams.Count} teams.\n");
                         ManageUserInput(Console.ReadLine());
                         break;
